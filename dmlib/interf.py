@@ -209,7 +209,7 @@ def repad_order(f3, fx, fy, pad=2, alpha=.25):
     offxb = offxa + f3.shape[1]
     offya = (y0 - f3.shape[0]) // 2
     offyb = offya + f3.shape[0]
-    f4 = np.zeros((y0, x0), dtype=np.complex)
+    f4 = np.zeros((y0, x0), dtype=np.complex_)
     f4[offya:offyb, offxa:offxb] = f3 * w
 
     yy = np.arange(-y0 // 2, y0 // 2, 1) / (pad * y0 * dfy)

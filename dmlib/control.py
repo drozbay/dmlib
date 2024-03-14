@@ -84,7 +84,7 @@ class ZernikeControl:
             else:
                 indices = get_noll_indices(pars)
         else:
-            indices = np.array([], dtype=np.int)
+            indices = np.array([], dtype=np.int_)
         assert (calib.get_rzern().nk == nz)
         ndof = indices.size
 
@@ -138,7 +138,7 @@ class ZernikeControl:
         if h5f:
             calib.save_h5py(h5f, prepend=h5_prefix)
 
-        self.h5_make_empty('flat_on', (1, ), np.bool)
+        self.h5_make_empty('flat_on', (1, ), np.bool_)
         self.h5_make_empty('uflat', (nu, ))
         self.h5_make_empty('x', (ndof, ))
         self.h5_make_empty('u', (nu, ))
@@ -353,7 +353,7 @@ class SVDControl(ZernikeControl):
             svd_modes = self.svd_pars['modes']
         else:
             svd_modes = 0
-        ignore = np.array(self.svd_pars['zernike_exclude'], dtype=np.int)
+        ignore = np.array(self.svd_pars['zernike_exclude'], dtype=np.int_)
         nignore = ignore.size
 
         self.h5_save('svd_modes', svd_modes)
@@ -364,7 +364,7 @@ class SVDControl(ZernikeControl):
             H = np.dot(self.P.T, self.calib.H)
         else:
             H = self.calib.H
-        smap = np.zeros(H.shape[0], dtype=np.bool)
+        smap = np.zeros(H.shape[0], dtype=np.bool_)
         smap[ignore - 1] = 1
         O1 = np.eye(H.shape[0])
         O1 = np.hstack((O1[:, smap], O1[:, np.invert(smap)])).T
@@ -455,12 +455,12 @@ class SVDControl(ZernikeControl):
 
 
 def get_noll_indices(pars):
-    noll_min = np.array(pars['min'], dtype=np.int)
-    noll_max = np.array(pars['max'], dtype=np.int)
-    minclude = np.array(pars['include'], dtype=np.int)
-    mexclude = np.array(pars['exclude'], dtype=np.int)
+    noll_min = np.array(pars['min'], dtype=np.int_)
+    noll_max = np.array(pars['max'], dtype=np.int_)
+    minclude = np.array(pars['include'], dtype=np.int_)
+    mexclude = np.array(pars['exclude'], dtype=np.int_)
 
-    mrange = np.arange(noll_min, noll_max + 1, dtype=np.int)
+    mrange = np.arange(noll_min, noll_max + 1, dtype=np.int_)
     zernike_indices1 = np.setdiff1d(
         np.union1d(np.unique(mrange), np.unique(minclude)),
         np.unique(mexclude))
@@ -472,12 +472,12 @@ def get_noll_indices(pars):
     for k in remaining:
         zernike_indices.append(k)
     assert (len(zernike_indices) == zernike_indices1.size)
-    zernike_indices = np.array(zernike_indices, dtype=np.int)
+    zernike_indices = np.array(zernike_indices, dtype=np.int_)
 
     log = logging.getLogger('ZernikeControl')
     log.info(f'selected Zernikes {zernike_indices}')
 
-    assert (zernike_indices.dtype == np.int)
+    assert (zernike_indices.dtype == np.int_)
     return zernike_indices
 
 
