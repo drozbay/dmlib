@@ -28,6 +28,8 @@ if (-not $?) {
 
 pip install numpy
 pip install Cython
+pip install matplotlib
+pip install PyQt5
 
 git config core.autocrlf true
 git config core.fileMode false
