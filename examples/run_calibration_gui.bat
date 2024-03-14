@@ -11,7 +11,17 @@ SET PARAMETERS=--cam-driver sim --dm-driver sim
 REM use "SET PARAMETERS=--help" to get a list of the possible parameters
 
 REM do not edit below
+FOR /F "tokens=1,2 delims==" %%i IN (..\config.txt) DO (
+    IF "%%i"=="ANACONDA_ENV_NAME" SET ENVIRONMENT_NAME=%%j
+)
+
+REM Check if the environment name is set
+IF "%ENVIRONMENT_NAME%"=="" (
+    echo Error: Anaconda environment name is not set.
+    exit /b 1
+)
+
 SET BASE_RELATIVE_PATH=..\devwraps\scripts\base.ps1
-SET CMD=. %BASE_RELATIVE_PATH%; Activate-Anaconda; cd ~; python -m %MODULE% %PARAMETERS%
+SET CMD=. %BASE_RELATIVE_PATH%; Activate-Anaconda -environmentName %ENVIRONMENT_NAME%; cd ~; python -m %MODULE% %PARAMETERS%
 echo "%CMD%"
 Powershell.exe -executionpolicy bypass -NoExit -Command "%CMD%"
