@@ -26,10 +26,8 @@ if (-not $?) {
 	exit
 }
 
-pip uninstall -y devwraps
-if (-not $?) {
-	exit
-}
+pip install numpy
+pip install Cython
 
 git config core.autocrlf true
 git config core.fileMode false
