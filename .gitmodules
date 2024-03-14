@@ -1,7 +1,7 @@
 [submodule "devwraps"]
 	path = devwraps
 	url = https://github.com/ozbayb/devwraps.git
-	branch = master
+	branch = dev
 [submodule "zernike"]
 	path = zernike
 	url = https://github.com/jacopoantonello/zernike.git
