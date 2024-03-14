@@ -1,4 +1,8 @@
-Activate-Anaconda
+Create-Anaconda-Environment -environmentName $global:dmlibEnvironmentName
+if (-not $?) {
+	exit
+}
+Activate-Anaconda -environmentName $global:dmlibEnvironmentName
 if (-not $?) {
 	exit
 }
@@ -19,28 +23,34 @@ git config core.autocrlf true
 git config core.fileMode false
 
 cd devwraps
-rm dist\*.whl -ErrorAction SilentlyContinue
+Remove-Item dist\*.whl -ErrorAction SilentlyContinue
 python setup.py bdist_wheel
+
 if (-not $?) {
 	exit
 }
+
 pip install (get-item .\dist\*.whl)
 cd ..
 
 cd zernike
-rm dist\*.whl -ErrorAction SilentlyContinue
+Remove-Item dist\*.whl -ErrorAction SilentlyContinue
 python setup.py bdist_wheel
+
 if (-not $?) {
 	exit
 }
+
 pip install (get-item .\dist\*.whl)
 cd ..
 
-rm dist\*.whl -ErrorAction SilentlyContinue
+Remove-Item dist\*.whl -ErrorAction SilentlyContinue
 python setup.py bdist_wheel
+
 if (-not $?) {
 	exit
 }
+
 pip install (get-item .\dist\*.whl)
 
 git config --unset core.autocrlf
