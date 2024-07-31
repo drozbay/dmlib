@@ -1,12 +1,24 @@
-name: dmlib
-
-dependencies:
-  - python=3
-  - numpy
-  - h5py
-  - matplotlib
-  - scikit-image
-  - cython
+name: dmlib_env
 
 channels:
+  - conda-forge
   - anaconda
+  - defaults
+
+dependencies:
+  - python=3.6
+  - numpy
+  - scipy=1.5.2
+  - matplotlib=3.3.4
+  - pandas=1.1.5
+  - scikit-image=0.17.2
+  - pillow=8.3.2
+  - h5py=3.1.0
+  - pyqt=5.9.2
+  - setuptools
+  - wheel
+  - cython=0.29.24
+  - git
+  - pip
+  - pip:
+    - PyQt5==5.9.2
