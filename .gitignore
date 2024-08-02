@@ -11,3 +11,5 @@ dist/
 /examples/*.log
 *.log
 /examples/*.json
+*conda/
+.vscode/

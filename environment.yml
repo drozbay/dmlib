@@ -9,15 +9,16 @@ dependencies:
   - python=3.6
   - numpy
   - scipy=1.5.2
-  - matplotlib=3.3.4
+  - matplotlib
   - pandas=1.1.5
-  - scikit-image=0.17.2
+  - scikit-image
   - pillow=8.3.2
-  - h5py=3.1.0
+  - h5py
   - pyqt=5.9.2
+  - dataclasses
   - setuptools
   - wheel
-  - cython=0.29.24
+  - cython
   - git
   - pip
   - pip:
