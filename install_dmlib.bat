@@ -5,6 +5,17 @@ setlocal enabledelayedexpansion
 set MINICONDA_INSTALLER=Miniconda3-latest-Windows-x86_64.exe
 set INSTALL_DIR=%~dp0conda
 
+:: Check for Visual C++
+call check_cl.bat
+set VC_CHECK_RESULT=%errorlevel%
+if %VC_CHECK_RESULT% equ 2 (
+    echo Run this script again after installing Build Tools for Visual Studio (2019 or later^)
+    goto exit_error
+) else if %VC_CHECK_RESULT% neq 0 (
+    echo An unexpected error occurred during Visual C++ check. Exiting...
+    goto exit_error
+)
+
 :: Read the environment name from environment.yml
 for /f "tokens=2 delims=: " %%a in ('findstr /B "name:" environment.yml') do set ENV_NAME=%%a
 if "%ENV_NAME%"=="" (
@@ -12,6 +23,12 @@ if "%ENV_NAME%"=="" (
     goto exit_error
 )
 echo Conda environment name: %ENV_NAME%
+
+:: Set up temp folder
+set CUSTOM_TEMP=%~dp0temp
+if not exist "%CUSTOM_TEMP%" mkdir "%CUSTOM_TEMP%"
+set TEMP=%CUSTOM_TEMP%
+set TMP=%CUSTOM_TEMP%
 
 :: Check if Portable Miniconda is already installed
 if not exist "%INSTALL_DIR%\Scripts\conda.exe" (
@@ -143,6 +160,7 @@ pause >nul
 exit /b 1
 
 :exit_success
+if %CUSTOM_TEMP% == %TEMP% rmdir /s /q %CUSTOM_TEMP%
 echo Press any key to exit...
 pause >nul
 exit /b 0
