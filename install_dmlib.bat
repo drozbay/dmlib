@@ -5,17 +5,6 @@ setlocal enabledelayedexpansion
 set MINICONDA_INSTALLER=Miniconda3-latest-Windows-x86_64.exe
 set INSTALL_DIR=%~dp0conda
 
-:: Check for Visual C++
-call check_cl.bat
-set VC_CHECK_RESULT=%errorlevel%
-if %VC_CHECK_RESULT% equ 2 (
-    echo Run this script again after installing Build Tools for Visual Studio (2019 or later^)
-    goto exit_error
-) else if %VC_CHECK_RESULT% neq 0 (
-    echo An unexpected error occurred during Visual C++ check. Exiting...
-    goto exit_error
-)
-
 :: Read the environment name from environment.yml
 for /f "tokens=2 delims=: " %%a in ('findstr /B "name:" environment.yml') do set ENV_NAME=%%a
 if "%ENV_NAME%"=="" (
