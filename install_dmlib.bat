@@ -149,7 +149,9 @@ pause >nul
 exit /b 1
 
 :exit_success
-if %CUSTOM_TEMP% == %TEMP% rmdir /s /q %CUSTOM_TEMP%
-echo Press any key to exit...
+if %CUSTOM_TEMP% == %TEMP% (
+    rmdir /s /q %CUSTOM_TEMP% >nul 2>&1
+)
+echo Press any key to continue...
 pause >nul
 exit /b 0
