@@ -8,13 +8,13 @@ channels:
 dependencies:
   - python=3.6
   - numpy
-  - scipy=1.5.2
+  - scipy
   - matplotlib
-  - pandas=1.1.5
+  - pandas
   - scikit-image
-  - pillow=8.3.2
+  - pillow
   - h5py
-  - pyqt=5.9.2
+  - pyqt
   - dataclasses
   - setuptools
   - wheel
@@ -22,4 +22,4 @@ dependencies:
   - git
   - pip
   - pip:
-    - PyQt5==5.9.2
+    - PyQt5
