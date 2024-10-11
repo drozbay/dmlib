@@ -271,12 +271,12 @@ def call_unwrap(phase, mask=None, seed=None):
     if mask is not None:
         assert (mask.shape == phase.shape)
         masked = np.ma.masked_array(phase, mask)
-        phi = np.array(unwrap_phase(masked, rng=seed))
+        phi = np.array(unwrap_phase(masked))
         # phi[mask] = phi[np.invert(mask)].mean()
         phi[mask] = 0
         return phi
     else:
-        return np.array(unwrap_phase(phase, rng=seed))
+        return np.array(unwrap_phase(phase))
 
 
 class FringeAnalysis:
